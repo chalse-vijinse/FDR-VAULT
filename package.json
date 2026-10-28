@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "SecureFDR - Smart Security Deposit & FDR Management Portal (SIH26265)",
   "scripts": {
+    "build": "cd frontend && npm install && npm run build",
     "install:all": "cmd /c \"cd backend && npm install && cd ../frontend && npm install\"",
     "dev:backend": "cmd /c \"cd backend && npm run dev\"",
     "dev:frontend": "cmd /c \"cd frontend && npm run dev\"",
