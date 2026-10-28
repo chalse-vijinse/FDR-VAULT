@@ -1,0 +1,15 @@
+{
+  "name": "securefdr-portal",
+  "version": "1.0.0",
+  "description": "SecureFDR - Smart Security Deposit & FDR Management Portal (SIH26265)",
+  "scripts": {
+    "install:all": "cmd /c \"cd backend && npm install && cd ../frontend && npm install\"",
+    "dev:backend": "cmd /c \"cd backend && npm run dev\"",
+    "dev:frontend": "cmd /c \"cd frontend && npm run dev\"",
+    "seed": "cmd /c \"cd backend && npm run seed\"",
+    "test": "cmd /c \"cd backend && npm run test\""
+  },
+  "keywords": ["sih", "aicte", "fdr", "security-deposit", "ocr"],
+  "author": "SIH Team",
+  "license": "ISC"
+}

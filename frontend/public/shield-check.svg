@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="shieldGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#12345A"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="tealGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14B8A6"/>
+      <stop offset="100%" stop-color="#0D9488"/>
+    </linearGradient>
+  </defs>
+  <path d="M24 4L7 11V22C7 32.5 14.2 42.3 24 45C33.8 42.3 41 32.5 41 22V11L24 4Z" fill="url(#shieldGrad2)"/>
+  <rect x="14" y="14" width="20" height="22" rx="3" fill="#FFFFFF" fill-opacity="0.12" stroke="#FFFFFF" stroke-width="1.5"/>
+  <path d="M28 14V19H34" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="24" cy="27" r="6" fill="url(#tealGrad2)" stroke="#FFFFFF" stroke-width="1.5"/>
+  <circle cx="24" cy="27" r="2.2" fill="#FFFFFF"/>
+  <path d="M24 21V23M24 31V33M18 27H20M28 27H30" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
