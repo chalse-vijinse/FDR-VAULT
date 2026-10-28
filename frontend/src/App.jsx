@@ -6,6 +6,9 @@ import { NotificationProvider } from './context/NotificationContext';
 // Layout
 import Layout from './components/layout/Layout';
 
+// Public & Landing Page
+import Landing from './pages/landing/Landing';
+
 // Auth Pages
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
@@ -58,7 +61,10 @@ export default function App() {
       <NotificationProvider>
         <BrowserRouter>
           <Routes>
-            {/* Public Routes */}
+            {/* Public Root Landing Page */}
+            <Route path="/" element={<Landing />} />
+
+            {/* Public Auth Routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -66,24 +72,22 @@ export default function App() {
 
             {/* Authenticated Protected Layout Routes */}
             <Route
-              path="/"
               element={
                 <ProtectedRoute>
                   <Layout />
                 </ProtectedRoute>
               }
             >
-              <Route index element={<Navigate to="/dashboard" replace />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="institutions" element={<InstitutionList />} />
-              <Route path="institutions/:id" element={<InstitutionDetail />} />
-              <Route path="fdr" element={<FdrList />} />
-              <Route path="fdr/create" element={<FdrCreate />} />
-              <Route path="fdr/:id" element={<FdrDetail />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/institutions" element={<InstitutionList />} />
+              <Route path="/institutions/:id" element={<InstitutionDetail />} />
+              <Route path="/fdr" element={<FdrList />} />
+              <Route path="/fdr/create" element={<FdrCreate />} />
+              <Route path="/fdr/:id" element={<FdrDetail />} />
 
               {/* Verification Routes (Super Admin & Officer) */}
               <Route
-                path="verifications"
+                path="/verifications"
                 element={
                   <ProtectedRoute requiredRoles={['SUPER_ADMIN', 'VERIFICATION_OFFICER']}>
                     <VerificationQueue />
@@ -91,7 +95,7 @@ export default function App() {
                 }
               />
               <Route
-                path="verifications/:id"
+                path="/verifications/:id"
                 element={
                   <ProtectedRoute requiredRoles={['SUPER_ADMIN', 'VERIFICATION_OFFICER']}>
                     <VerificationDetail />
@@ -99,14 +103,14 @@ export default function App() {
                 }
               />
 
-              <Route path="release-requests" element={<ReleaseRequestList />} />
-              <Route path="release-requests/:id" element={<ReleaseRequestDetail />} />
-              <Route path="notifications" element={<NotificationCenter />} />
-              <Route path="reports" element={<Reports />} />
+              <Route path="/release-requests" element={<ReleaseRequestList />} />
+              <Route path="/release-requests/:id" element={<ReleaseRequestDetail />} />
+              <Route path="/notifications" element={<NotificationCenter />} />
+              <Route path="/reports" element={<Reports />} />
 
               {/* Super Admin Only Routes */}
               <Route
-                path="audit-logs"
+                path="/audit-logs"
                 element={
                   <ProtectedRoute requiredRoles={['SUPER_ADMIN']}>
                     <AuditLogs />
@@ -114,7 +118,7 @@ export default function App() {
                 }
               />
               <Route
-                path="users"
+                path="/users"
                 element={
                   <ProtectedRoute requiredRoles={['SUPER_ADMIN']}>
                     <UserManagement />
@@ -122,8 +126,7 @@ export default function App() {
                 }
               />
 
-              <Route path="settings" element={<Settings />} />
-              <Route path="*" element={<NotFound />} />
+              <Route path="/settings" element={<Settings />} />
             </Route>
 
             <Route path="*" element={<NotFound />} />

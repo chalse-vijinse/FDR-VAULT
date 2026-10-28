@@ -108,6 +108,12 @@ export default function Login() {
     <div className="min-h-screen bg-[#0d223a] flex flex-col justify-center py-12 sm:px-6 lg:px-8 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#12345A] via-[#0d233c] to-[#071322]">
       {/* Brand Header */}
       <div className="sm:mx-auto sm:w-full sm:max-w-lg text-center px-4">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-1 text-xs font-medium text-slate-400 hover:text-teal-300 mb-4 transition-colors"
+        >
+          <span>&larr; Back to FDRvault Home</span>
+        </Link>
         <div className="inline-flex items-center justify-center mb-3">
           <FdrVaultLogo size="xl" showTagline={false} theme="dark" />
         </div>
