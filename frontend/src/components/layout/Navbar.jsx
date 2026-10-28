@@ -9,41 +9,21 @@ import {
   LogOut,
   ChevronDown,
   Building,
-  CheckCircle,
-  Users,
   ShieldCheck
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function Navbar({ onToggleSidebar }) {
-  const { user, role, logout, switchDemoUser } = useAuth();
+  const { user, role, logout } = useAuth();
   const { notifications, unreadCount, markAsRead, markAllAsRead } = useNotifications();
   const [profileOpen, setProfileOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
-  const [demoMenuOpen, setDemoMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     await logout();
     navigate('/login');
   };
-
-  const handleDemoSwitch = async (email) => {
-    setDemoMenuOpen(false);
-    const res = await switchDemoUser(email);
-    if (res.success) {
-      navigate('/dashboard');
-    }
-  };
-
-  const demoPersonas = [
-    { label: 'AICTE Admin: Sunil Verma, IAS', email: 'admin@securefdr.gov.in', role: 'SUPER_ADMIN' },
-    { label: 'AICTE Officer: Dr. Sharma (North)', email: 'officer.sharma@securefdr.gov.in', role: 'VERIFICATION_OFFICER' },
-    { label: 'AICTE Officer: P. Patel (Compliance)', email: 'officer.patel@securefdr.gov.in', role: 'VERIFICATION_OFFICER' },
-    { label: 'College: Delhi Inst. (Dr. Ramesh)', email: 'admin@iitdelhi.ac.in', role: 'INSTITUTION_ADMIN' },
-    { label: 'College: Pilani Tech (Prof. Sen)', email: 'admin@bits.ac.in', role: 'INSTITUTION_ADMIN' },
-    { label: 'College: VJTI Mumbai (Dr. Sanjay)', email: 'admin@vjti.ac.in', role: 'INSTITUTION_ADMIN' }
-  ];
 
   const getRoleBadge = (r) => {
     switch (r) {
@@ -89,42 +69,8 @@ export default function Navbar({ onToggleSidebar }) {
           </Link>
         </div>
 
-        {/* Right Side: Demo Persona Quick Switcher + Notifications + Profile */}
+        {/* Right Side: Notifications + Profile */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Quick Demo Role Switcher for Juror Evaluation */}
-          <div className="relative">
-            <button
-              onClick={() => { setDemoMenuOpen(!demoMenuOpen); setProfileOpen(false); setNotifOpen(false); }}
-              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-navy-50 text-[#12345A] hover:bg-navy-100 border border-navy-200 transition-colors shadow-2xs"
-            >
-              <Users className="w-3.5 h-3.5 text-[#2563EB]" />
-              <span>Switch Persona</span>
-              <ChevronDown className="w-3 h-3 text-slate-400" />
-            </button>
-
-            {demoMenuOpen && (
-              <div className="absolute right-0 mt-2 w-72 rounded-xl bg-white shadow-modal border border-slate-200 py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
-                <div className="px-3 py-1.5 border-b border-slate-100 text-[11px] font-bold uppercase tracking-wider text-slate-400">
-                  Select Juror Demo Persona
-                </div>
-                {demoPersonas.map((p) => (
-                  <button
-                    key={p.email}
-                    onClick={() => handleDemoSwitch(p.email)}
-                    className={`w-full text-left px-3.5 py-2 text-xs flex items-center justify-between hover:bg-slate-50 transition-colors ${
-                      user?.email === p.email ? 'bg-royal-50/70 font-semibold text-[#2563EB]' : 'text-slate-700'
-                    }`}
-                  >
-                    <div>
-                      <div className="font-medium text-slate-900">{p.label}</div>
-                      <div className="text-[10px] text-slate-400">{p.email}</div>
-                    </div>
-                    {user?.email === p.email && <CheckCircle className="w-3.5 h-3.5 text-[#2563EB]" />}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
 
           {/* Institution Tag (if College Admin) */}
           {user?.institutionName && (
@@ -218,7 +164,7 @@ export default function Navbar({ onToggleSidebar }) {
           {/* User Profile Dropdown */}
           <div className="relative">
             <button
-              onClick={() => { setProfileOpen(!profileOpen); setNotifOpen(false); setDemoMenuOpen(false); }}
+              onClick={() => { setProfileOpen(!profileOpen); setNotifOpen(false); }}
               className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-slate-100 transition-colors text-left"
             >
               <div className="w-8 h-8 rounded-full bg-[#12345A] text-white flex items-center justify-center font-bold text-xs ring-2 ring-teal-500/30">

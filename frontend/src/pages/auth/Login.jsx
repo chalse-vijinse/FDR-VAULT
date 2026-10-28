@@ -10,13 +10,11 @@ import {
   Building2,
   ShieldCheck,
   ShieldAlert,
-  UserCheck,
-  CheckCircle2,
-  KeyRound
+  CheckCircle2
 } from 'lucide-react';
 
 export default function Login() {
-  const { login, switchDemoUser } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -99,23 +97,6 @@ export default function Login() {
       }
     } catch (err) {
       setError(err.response?.data?.message || 'Server connection error. Please verify backend service.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleQuickLogin = async (demoEmail) => {
-    setError('');
-    setLoading(true);
-    try {
-      const res = await switchDemoUser(demoEmail);
-      if (res.success) {
-        navigate('/dashboard');
-      } else {
-        setError(res.message);
-      }
-    } catch (err) {
-      setError('Failed to switch persona.');
     } finally {
       setLoading(false);
     }
@@ -270,29 +251,7 @@ export default function Login() {
             </button>
           </form>
 
-          {/* Quick 1-Click Persona Login for Evaluation */}
-          <div className="mt-5 pt-4 border-t border-slate-200">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                Evaluation Quick Access
-              </span>
-              <span className="text-[10px] text-teal-600 font-medium">Demo Verified</span>
-            </div>
-            <button
-              type="button"
-              onClick={() => handleQuickLogin(currentConfig.defaultEmail)}
-              disabled={loading}
-              className="w-full py-2 px-3 rounded-lg border border-blue-200 bg-blue-50/70 hover:bg-blue-100/90 text-[#12345A] text-xs font-semibold flex items-center justify-between transition-colors shadow-2xs"
-            >
-              <div className="flex items-center gap-2 truncate">
-                <UserCheck className="w-4 h-4 text-[#2563EB] shrink-0" />
-                <span className="truncate">1-Click Sign-in: {currentConfig.personaName}</span>
-              </div>
-              <span className="text-[11px] text-[#2563EB] font-bold shrink-0">&rarr;</span>
-            </button>
-          </div>
-
-          <div className="mt-4 text-center text-xs text-slate-500">
+          <div className="mt-5 text-center text-xs text-slate-500">
             New College or Technical Institution?{' '}
             <Link to="/register" className="font-semibold text-[#2563EB] hover:underline">
               Submit registration request
